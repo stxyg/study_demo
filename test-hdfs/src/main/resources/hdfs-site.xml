@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License. See accompanying LICENSE file.
+-->
+
+<!-- Put site-specific property overrides in this file. -->
+
+<configuration>
+    <property>
+        <name>dfs.replication</name>
+        <value>2</value>
+    </property>
+    <property>
+    	<!--namenode元数据存放位置-->
+        <name>dfs.namenode.name.dir</name>
+        <value>/var/bigdata/hadoop/ha/dfs/name</value>
+    </property>
+    <property>
+    	<!--datanode数据存放位置-->
+        <name>dfs.datanode.data.dir</name>
+        <value>/var/bigdata/hadoop/ha/dfs/data</value>
+    </property>
+
+   <!--定义NN逻辑地址-->
+<property>
+  <name>dfs.nameservices</name>
+  <value>mycluster</value>
+</property>
+<!--最大2个NN-->
+<property>
+  <name>dfs.ha.namenodes.mycluster</name>
+  <value>nn1,nn2</value>
+</property>
+<!--定义实际的rpc类型的NN-->
+<property>
+  <name>dfs.namenode.rpc-address.mycluster.nn1</name>
+  <value>node01:8020</value>
+</property>
+<property>
+  <name>dfs.namenode.rpc-address.mycluster.nn2</name>
+  <value>node02:8020</value>
+</property>
+<!--定义实际的HTTP类型的NN-->
+<property>
+  <name>dfs.namenode.http-address.mycluster.nn1</name>
+  <value>node01:50070</value>
+</property>
+<property>
+  <name>dfs.namenode.http-address.mycluster.nn2</name>
+  <value>node02:50070</value>
+</property>
+<!--jn节点-->
+<property>
+  <name>dfs.namenode.shared.edits.dir</name> 
+  <value>qjournal://node01:8485;node02:8485;node03:8485/mycluster</value>
+</property>
+<!--jn的存储地址-->
+<property>
+  <name>dfs.journalnode.edits.dir</name>
+  <value>/var/bigdata/hadoop/ha/dfs/jn</value>
+</property>
+<!--决定当前节点为active的代理类，发出切换指令的类-->
+<property>
+  <name>dfs.client.failover.proxy.provider.mycluster</name>
+  <value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</value>
+</property>
+<!--方式1：通过ssh免密方式发出切换指令；还可以使用shell方式-->
+<property>
+  <name>dfs.ha.fencing.methods</name>
+  <value>sshfence</value>
+</property>
+<property>
+  <name>dfs.ha.fencing.ssh.private-key-files</name>
+  <value>/home/sa/.ssh/id_dsa</value>
+</property>
+<!--开启zkfc故障自动转移，会自动创建进程-->
+ <property>
+   <name>dfs.ha.automatic-failover.enabled</name>
+   <value>true</value>
+ </property>
+
+</configuration>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="EclipseCodeFormatterProjectSettings">
+    <option name="projectSpecificProfile">
+      <ProjectSpecificProfile>
+        <option name="eclipseVersion" value="ECLIPSE_44" />
+        <option name="enableJSFormatting" value="true" />
+        <option name="formatter" value="ECLIPSE" />
+        <option name="importOrdering" value="ECLIPSE_44" />
+        <option name="pathToConfigFileJS" value="D:/projects/thread/doc/eclipse conf/code-templates-js.xml" />
+        <option name="pathToConfigFileJava" value="D:/projects/thread/doc/eclipse conf/code-templates-java.xml" />
+        <option name="useOldEclipseJavaFormatter" value="true" />
+      </ProjectSpecificProfile>
+    </option>
+  </component>
+</project>
